@@ -1,16 +1,49 @@
-# React + Vite
+# FounderMatch 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Tinder-style networking platform for startup founders and entrepreneurs. Swipe right to connect with visionary builders, or left to pass.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Login / Register** — toggled single-page form with client-side validation; email + password for login, adds name/title/company for registration
+- **Swipe Deck** — drag-to-swipe (mouse + touch) with visual CONNECT/PASS overlays; card depth stack (top 3 visible, offset/scaled); threshold-based commit at ±100 px drag
+- **Profile Cards** — tabbed layout (About / Skills / Highlights) per founder; gradient header unique per profile; shows stage, industry, bio, looking-for, achievements
+- **Match Modal** — fires probabilistically on right-swipe with confetti animation
+- **Connections Sidebar** — live list of liked founders; undo last swipe
+- **8 Sample Founder Profiles** — spanning AI, CleanTech, HealthTech, Web3, EdTech, AgriTech, Fashion, QuantumTech
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** + **Vite**
+- Pure CSS (no UI library) with CSS custom properties
+- Fully responsive (mobile + desktop)
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Lint
+npm run lint
+```
+
+## Project Structure
+
+```
+src/
+  App.jsx                  # Login ↔ SwipePage state gate
+  data/founders.js         # Static founder seed data
+  components/
+    LoginPage.jsx/.css     # Login & registration form
+    SwipePage.jsx/.css     # Swipe logic, action buttons, sidebar
+    ProfileCard.jsx/.css   # Drag mechanics + tabbed content
+    MatchModal.jsx/.css    # Match celebration modal
+```
+
+Drag state is tracked via a `useRef` (avoids re-renders mid-drag); swipe direction is resolved on `mouseup` / `touchend`.

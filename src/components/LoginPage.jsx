@@ -148,7 +148,18 @@ export default function LoginPage({ onLogin }) {
 
             {error && <p className="form-error">{error}</p>}
 
-            <button className="login-btn" type="submit" disabled={loading}>
+            <button
+              className="login-btn"
+              type="submit"
+              disabled={loading}
+              aria-label={
+                loading
+                  ? 'Loading'
+                  : mode === 'login'
+                  ? 'Sign In'
+                  : 'Create Account'
+              }
+            >
               {loading ? (
                 <span className="btn-spinner" />
               ) : mode === 'login' ? (

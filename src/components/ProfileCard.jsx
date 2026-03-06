@@ -65,8 +65,12 @@ export default function ProfileCard({ founder, onSwipe, isTop, style }) {
 
   const cardStyle = {
     ...style,
-    transform: `translateX(${dragX}px) rotate(${getRotation()}deg)`,
-    transition: isDragging ? 'none' : 'transform 0.3s ease',
+    transform: isTop
+      ? `translateX(${dragX}px) rotate(${getRotation()}deg)`
+      : style && style.transform,
+    transition: isTop
+      ? (isDragging ? 'none' : 'transform 0.3s ease')
+      : style && style.transition,
     cursor: isTop ? (isDragging ? 'grabbing' : 'grab') : 'default',
     userSelect: 'none',
   };
